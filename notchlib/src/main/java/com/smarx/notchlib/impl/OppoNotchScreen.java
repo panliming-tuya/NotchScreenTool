@@ -1,7 +1,9 @@
 package com.smarx.notchlib.impl;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Rect;
+import android.os.Build;
 import android.text.TextUtils;
 
 import com.smarx.notchlib.INotchScreen;
@@ -10,6 +12,7 @@ import com.smarx.notchlib.utils.ScreenUtil;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+@TargetApi(Build.VERSION_CODES.O)
 public class OppoNotchScreen implements INotchScreen {
 
     /**
@@ -38,15 +41,16 @@ public class OppoNotchScreen implements INotchScreen {
     }
 
     @Override
-    public void hasNotch(Activity activity, HasNotchCallback callback) {
+    public boolean hasNotch(Activity activity) {
         boolean ret = false;
         try {
             ret = activity.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
         } catch (Throwable ignore) {
         }
-        callback.onResult(ret);
+        return ret;
     }
 
+    @Deprecated
     @Override
     public void setDisplayInNotch(Activity activity) {
 

@@ -1,7 +1,9 @@
 package com.smarx.notchlib.impl;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Rect;
+import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -12,6 +14,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+@TargetApi(Build.VERSION_CODES.O)
 public class HuaweiNotchScreen implements INotchScreen {
     /**
      * 刘海屏全屏显示FLAG
@@ -35,9 +38,8 @@ public class HuaweiNotchScreen implements INotchScreen {
         }
     }
 
-
     @Override
-    public void hasNotch(Activity activity, HasNotchCallback callback) {
+    public boolean hasNotch(Activity activity) {
         boolean ret = false;
         try {
             ClassLoader cl = activity.getClassLoader();
@@ -46,7 +48,7 @@ public class HuaweiNotchScreen implements INotchScreen {
             ret = (boolean) get.invoke(HwNotchSizeUtil);
         } catch (Throwable ignore) {
         }
-        callback.onResult(ret);
+        return ret;
     }
 
     @Override

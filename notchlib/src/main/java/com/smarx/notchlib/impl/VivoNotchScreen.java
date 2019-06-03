@@ -1,8 +1,10 @@
 package com.smarx.notchlib.impl;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.util.Log;
 
 import com.smarx.notchlib.INotchScreen;
@@ -11,6 +13,10 @@ import com.smarx.notchlib.utils.ScreenUtil;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ * 测试之后发现vivo并不需要适配，因为vivo没有将显示区域绘制到耳朵区的API
+ */
+@TargetApi(Build.VERSION_CODES.O)
 public class VivoNotchScreen implements INotchScreen {
     public static boolean isNotch() {
         boolean value = false;
@@ -47,10 +53,11 @@ public class VivoNotchScreen implements INotchScreen {
     }
 
     @Override
-    public void hasNotch(Activity activity, HasNotchCallback callback) {
-        callback.onResult(isNotch());
+    public boolean hasNotch(Activity activity) {
+        return isNotch();
     }
 
+    @Deprecated
     @Override
     public void setDisplayInNotch(Activity activity) {
 

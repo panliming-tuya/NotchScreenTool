@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface INotchScreen {
 
-    void hasNotch(Activity activity, HasNotchCallback callback);
+    boolean hasNotch(Activity activity);
 
     void setDisplayInNotch(Activity activity);
 

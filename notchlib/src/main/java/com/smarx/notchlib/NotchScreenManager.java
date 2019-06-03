@@ -30,27 +30,40 @@ public class NotchScreenManager {
             notchScreen.setDisplayInNotch(activity);
     }
 
-    public void getNotchInfo(final Activity activity, final INotchScreen.NotchScreenCallback notchScreenCallback){
+    public void getNotchInfo(final Activity activity, final INotchScreen.NotchScreenCallback notchScreenCallback) {
         final INotchScreen.NotchScreenInfo notchScreenInfo = new INotchScreen.NotchScreenInfo();
         if (notchScreen != null) {
-            notchScreen.hasNotch(activity, new INotchScreen.HasNotchCallback() {
-                @Override
-                public void onResult(boolean hasNotch) {
-                    notchScreenInfo.hasNotch = hasNotch;
-                    if(hasNotch){
-                        notchScreen.getNotchRect(activity, new INotchScreen.NotchSizeCallback() {
-                            @Override
-                            public void onResult(List<Rect> notchRects) {
-                                notchScreenInfo.notchRects = notchRects;
-                                notchScreenCallback.onResult(notchScreenInfo);
-                            }
-                        });
-                    }else {
+            // Android P 因没有获取是否为刘海屏的方法，单独处理。
+            if (notchScreen instanceof AndroidPNotchScreen) {
+                notchScreen.getNotchRect(activity, new INotchScreen.NotchSizeCallback() {
+                    @Override
+                    public void onResult(List<Rect> notchRects) {
+                        if (notchRects != null && notchRects.size() > 0) {
+                            notchScreenInfo.hasNotch = true;
+                            notchScreenInfo.notchRects = notchRects;
+                        } else {
+                            notchScreenInfo.hasNotch = false;
+                        }
                         notchScreenCallback.onResult(notchScreenInfo);
                     }
+                });
+            } else {
+                boolean hasNotch = notchScreen.hasNotch(activity);
+                notchScreenInfo.hasNotch = hasNotch;
+                if (hasNotch) {
+                    notchScreen.getNotchRect(activity, new INotchScreen.NotchSizeCallback() {
+                        @Override
+                        public void onResult(List<Rect> notchRects) {
+                            notchScreenInfo.notchRects = notchRects;
+                            notchScreenCallback.onResult(notchScreenInfo);
+                        }
+                    });
+                } else {
+                    notchScreenCallback.onResult(notchScreenInfo);
                 }
-            });
-        }else {
+            }
+
+        } else {
             notchScreenCallback.onResult(notchScreenInfo);
         }
     }
