@@ -4,6 +4,22 @@
 
 > [Android刘海屏、水滴屏全面屏适配方案](https://www.jianshu.com/p/2b8db60ba8df)
 
+## 安装
+
+项目根目录的`build.gradle`中添加：
+
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+            maven { url "https://jitpack.io" } // 添加jitpack
+        }
+    }
+
+在module层级的`build.gradle`中添加依赖
+
+    implementation 'com.github.smarxpan:NotchScreenTool:0.0.1'
+
 ## 使用
 
 1. 设置UI显示到刘海区域
