@@ -20,10 +20,9 @@ public class AndroidPNotchScreen implements INotchScreen {
     /**
      * Android P 没有单独的判断方法，根据getNotchRect方法的返回结果处理即可
      */
-    @Deprecated
     @Override
     public boolean hasNotch(Activity activity) {
-        return false;
+        return true;
     }
 
     @Override
