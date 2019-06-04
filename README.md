@@ -2,23 +2,7 @@
 
 具体的适配过程可以查看这篇博客：
 
-> 
-
-## 运行截图
-
-MainActivity
-
-![](screenshot/Screenshot_main.png)
-
-竖屏适配效果
-
-![](screenshot/Screenshot_portrait.png)
-
-横屏适配效果
-
-![](screenshot/Screenshot_landscape.png)
-
-
+> [Android刘海屏、水滴屏全面屏适配方案](https://www.jianshu.com/p/2b8db60ba8df)
 
 ## 使用
 
@@ -47,6 +31,20 @@ MainActivity
 	|---|---|---|---|
 	|hasNotch|boolean|是|是否是刘海屏
 	|notchRects|List|否|屏幕刘海Rect的列表(屏幕可能有多个刘海)<BR>hasNotch属性为false时此字段为null
+
+## 运行截图
+
+MainActivity
+
+![](screenshot/Screenshot_main.png){:height="50%" width="50%"}
+
+横屏适配效果
+
+![](screenshot/Screenshot_landscape.png)
+
+竖屏适配效果
+
+![](screenshot/Screenshot_portrait.png){:height="50%" width="50%"}
 
 ## License
 
