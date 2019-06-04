@@ -36,7 +36,7 @@
 
 MainActivity
 
-![](screenshot/Screenshot_main.png){:height="50%" width="50%"}
+![](screenshot/Screenshot_main.png)
 
 横屏适配效果
 
@@ -44,7 +44,7 @@ MainActivity
 
 竖屏适配效果
 
-![](screenshot/Screenshot_portrait.png){:height="50%" width="50%"}
+![](screenshot/Screenshot_portrait.png)
 
 ## License
 
