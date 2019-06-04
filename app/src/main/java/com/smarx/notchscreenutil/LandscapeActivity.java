@@ -14,7 +14,7 @@ import com.smarx.notchlib.NotchScreenManager;
 
 public class LandscapeActivity extends AppCompatActivity {
 
-    private static final String TAG = "notch";
+    private static final String TAG = "landscape_notch";
     private NotchScreenManager notchScreenManager = NotchScreenManager.getInstance();
     private TextView textView;
 
